@@ -15,7 +15,7 @@
 	<description>Map for locating gpus</description>
 	<properties>
 		<java.version>11</java.version>
-		<start-class>com.gpu_map.accessingdatamysql.AccessingDataMysqlApplication</start-class>
+		<start-class>com.gpu_map.gpu.GpuMapApplication</start-class>
 	</properties>
 	<dependencies>
 		<dependency>
