@@ -1,6 +1,11 @@
 package com.gpu_map.gpu;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,14 +40,16 @@ public class MainController {
   // }
 
   @PostMapping(path="/add/json") // Map ONLY POST Requests
-  public @ResponseBody String addNewUser (@RequestBody Gpu gpu) {
+  public @ResponseBody ResponseEntity<Gpu> addNewUser (@RequestBody Gpu gpu) {
     // @ResponseBody means the returned String is the response, not a view name
     // @RequestParam means it is a parameter from the GET or POST request
+    gpuRepository.save(gpu);
 
-    Gpu n = gpu;
-
-    gpuRepository.save(n);
-    return "Saved";
+    Map<String, Integer> temp = gpu.getPrices();
+    for(String s: temp.keySet()) {
+      System.out.println(s);
+    }
+    return new ResponseEntity<Gpu>(gpu, new HttpHeaders(), HttpStatus.CREATED);
   }
 
   @GetMapping(path="/all")
