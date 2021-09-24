@@ -4,6 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity // This tells Hibernate to make a table out of this class
 public class Gpu {
@@ -20,6 +23,9 @@ public class Gpu {
   private Integer likes;
 
   private Integer dislikes;
+
+  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy", timezone = "UTC")
+  private Date date;
 
   public Integer getId() {
     return id;
@@ -67,5 +73,13 @@ public class Gpu {
 
   public void setDislikes(Integer dislikes) {
     this.dislikes = dislikes;
+  }
+
+  public Date getDate() {
+    return date;
+  }
+
+  public void setDate(Date date) {
+    this.date = date;
   }
 }
